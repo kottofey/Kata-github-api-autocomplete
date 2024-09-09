@@ -1,4 +1,4 @@
-const debounce = (fn, debounceTime) => {
+export function debounce (fn, debounceTime) {
   let timer;
 
   return function() {
@@ -8,9 +8,9 @@ const debounce = (fn, debounceTime) => {
       fn.apply(this, arguments);
     }, debounceTime);
   };
-};
+}
 
-function createRepoItem (item) {
+export function createRepoItem (item) {
   let newItem = document.createElement('div');
   newItem.className = 'repositories__item';
 
@@ -32,7 +32,7 @@ function createRepoItem (item) {
   githubSearch.value = '';
 }
 
-function createSearchItem (item, id) {
+export function createSearchItem (item, id) {
   let newItem = document.createElement('li');
   newItem.className = 'results__item';
   newItem.textContent = item;
@@ -41,11 +41,11 @@ function createSearchItem (item, id) {
   results.append(newItem);
 }
 
-function clearSearchItems () {
+export function clearSearchItems () {
   results.innerHTML = '';
 }
 
-async function getRepositories (req) {
+export async function getRepositories (req) {
   const url = new URL('https://api.github.com/search/repositories');
   url.search = 'q=' + req;
 

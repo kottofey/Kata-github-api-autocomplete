@@ -1,5 +1,5 @@
 import '../scss/style.scss';
-import './helpers.js';
+import * as helper from './helpers.js';
 
 // Remove added repo buttons
 repositories.addEventListener('click', (e) => {
@@ -12,20 +12,20 @@ repositories.addEventListener('click', (e) => {
 results.addEventListener('click', (e) => {
   if (e.target.classList.contains('results__item')) {
     const item = sessionStorage.getItem(e.target.id);
-    createRepoItem(JSON.parse(item));
-    clearSearchItems();
+    helper.createRepoItem(JSON.parse(item));
+    helper.clearSearchItems();
   }
 });
 
 // Searching
 async function search (event) {
-  const searchString = await getRepositories(event.target.value);
-  clearSearchItems();
+  const searchString = await helper.getRepositories(event.target.value);
+  helper.clearSearchItems();
   for (let i = 0; i < 5; i++) {
     sessionStorage.setItem('item' + i, JSON.stringify(searchString[i]));
-    createSearchItem(searchString[i].name, i);
+    helper.createSearchItem(searchString[i].name, i);
   }
 }
 
-const searchDebounced = debounce(search, 300);
+const searchDebounced = helper.debounce(search, 300);
 githubSearch.addEventListener('keyup', searchDebounced);
