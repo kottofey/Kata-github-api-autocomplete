@@ -1,0 +1,116 @@
+@import "normalize.css";
+@import "vars.scss";
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.page-wrapper {
+  background-color: #282726;
+}
+
+.search {
+  margin: 10px auto;
+  background-color: #c4c4c4;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+
+  &__input {
+    width: 300px;
+    height: 50px;
+    margin: 10px auto;
+    padding: 10px;
+
+    font-size: 36px;
+    font-family: Roboto, Arial, sans-serif;
+  }
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 28px;
+    padding: 6px;
+    font-size: 16px;
+
+    margin-bottom: -1px;
+
+    font-family: Roboto, Arial, sans-serif;
+    border: 1px solid #000;
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+    
+    &:hover {
+      background-color: #65cdf9;
+    }
+  }
+}
+
+.repositories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__item {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 300px;
+    height: 70px;
+    padding: 5px;
+    margin-bottom: -1px;
+    background-color: #E27BEB;
+    border: 1px solid #000;
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+
+    &--span {
+      width: 250px;
+    }
+  }
+
+  &__deleteButton {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    right: 10px;
+    top: 25%;
+    border: none;
+    background: transparent url('../images/cross.png') no-repeat 50% 50%;
+    background-size: 40px 40px;
+
+    transition-duration: 100ms;
+    transition-property: scale;
+    transform-origin: center;
+
+    &:hover {
+      scale: 1.1;
+    }
+
+    &:active {
+      scale: 1;
+
+    }
+  }
+}
