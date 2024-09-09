@@ -58,7 +58,7 @@ html {
     &:last-child {
       margin-bottom: 10px;
     }
-    
+
     &:hover {
       background-color: #65cdf9;
     }
@@ -75,7 +75,7 @@ html {
     position: relative;
     flex-direction: column;
     width: 300px;
-    height: 70px;
+    min-height: 70px;
     padding: 5px;
     margin-bottom: -1px;
     background-color: #E27BEB;
