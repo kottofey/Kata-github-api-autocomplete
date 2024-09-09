@@ -1,4 +1,5 @@
 import '../scss/style.scss';
+import './helpers.js';
 
 // Remove added repo buttons
 repositories.addEventListener('click', (e) => {

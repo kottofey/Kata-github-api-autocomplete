@@ -3,6 +3,7 @@ import { sync } from 'glob';
 
 export default defineConfig({
   root: './src',
+  base: '/Kata-github-api-autocomplete/',
   build: {
     outDir: '../dist',
     sourcemap: true,
