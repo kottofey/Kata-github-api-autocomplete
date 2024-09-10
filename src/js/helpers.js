@@ -1,3 +1,5 @@
+export const SEARCH_ITEMS_PER_PAGE = 5;
+
 export function debounce (fn, debounceTime) {
   let timer;
 
@@ -10,51 +12,50 @@ export function debounce (fn, debounceTime) {
   };
 }
 
-export function createRepoItem (item) {
+export function createRepoItem (repoBlock, item) {
   let newItem = document.createElement('div');
-  newItem.className = 'repositories__item';
+  newItem.classList.add('repositories__item');
 
   const span = document.createElement('span');
-  span.className = 'repositories__item--span';
+  span.classList.add('repositories__item--span');
+
   const name = span.cloneNode(true);
   const owner = span.cloneNode(true);
   const stars = span.cloneNode(true);
+
   name.textContent = `Name: ${item.name}`;
   owner.textContent = `Owner: ${item.owner.login}`;
   stars.textContent = `Stars: ${item.stargazers_count}`;
 
   const btn = document.createElement('button');
-  btn.className = 'repositories__deleteButton';
-  btn.id = 'repoDelete';
+  btn.classList.add('repositories__deleteButton');
   newItem.append(name, owner, stars, btn);
-  repositories.append(newItem);
-
-  githubSearch.value = '';
+  repoBlock.append(newItem);
 }
 
-export function createSearchItem (item, id) {
+export function appendItemToBlock (block, item, id) {
   let newItem = document.createElement('li');
   newItem.className = 'results__item';
   newItem.textContent = item;
   newItem.id = 'item' + id;
 
-  results.append(newItem);
+  block.append(newItem);
 }
 
-export function clearSearchItems () {
-  results.innerHTML = '';
+export function clearBlock (items) {
+  items.innerHTML = '';
 }
 
 export async function getRepositories (req) {
+  if (!req) return [];
+
   const url = new URL('https://api.github.com/search/repositories');
-  url.search = 'q=' + req;
+  url.search = 'q=' + req + '&per_page=' + SEARCH_ITEMS_PER_PAGE;
 
   const response = await fetch(url);
   if (!response.ok) {
-    console.log('nothing found');
-    return;
-  } else if (response.status !== 200) {
-    console.log('Error, status code ' + response.status);
+    console.log(`Error! Response code: ${response.status}`);
+    return [];
   }
   const items = await response.json();
   return items.items;

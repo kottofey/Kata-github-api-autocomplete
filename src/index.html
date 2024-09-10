@@ -4,16 +4,24 @@
   <meta charset="UTF-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Kata Github API Autocomplete</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="favicon.ico" rel="icon" type="image/x-icon">
 </head>
+
 <body class="page-wrapper">
 
 <div class="search">
-  <label for="githubSearch"></label>
-  <input class="search__input" id="githubSearch" name="githubSearch" placeholder="search..." type="search">
-  <ul class="results" id="results"></ul>
+  <label for="searchInput"> </label>
+  <input class="search__input"
+         id="searchInput"
+         name="search__input"
+         placeholder="search..."
+         type="search"
+         autofocus>
 
-  <div class="repositories" id="repositories"></div>
+
+  <ul class="results"></ul>
+
+  <div class="repositories"></div>
 </div>
 
 <script src="./js/main.js" type="module"></script>
