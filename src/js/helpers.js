@@ -1,4 +1,4 @@
-export const SEARCH_ITEMS_PER_PAGE = 5;
+const SEARCH_ITEMS_PER_PAGE = '5';
 
 export function debounce (fn, debounceTime) {
   let timer;
@@ -22,14 +22,16 @@ export function createRepoItem (repoBlock, item) {
   const name = span.cloneNode(true);
   const owner = span.cloneNode(true);
   const stars = span.cloneNode(true);
+  const desc = span.cloneNode(true);
 
   name.textContent = `Name: ${item.name}`;
   owner.textContent = `Owner: ${item.owner.login}`;
   stars.textContent = `Stars: ${item.stargazers_count}`;
+  desc.textContent = `Desc: ${item.description}`;
 
   const btn = document.createElement('button');
   btn.classList.add('repositories__deleteButton');
-  newItem.append(name, owner, stars, btn);
+  newItem.append(name, owner, stars, desc, btn);
   repoBlock.append(newItem);
 }
 
@@ -50,7 +52,8 @@ export async function getRepositories (req) {
   if (!req) return [];
 
   const url = new URL('https://api.github.com/search/repositories');
-  url.search = 'q=' + req + '&per_page=' + SEARCH_ITEMS_PER_PAGE;
+  url.searchParams.set('q', encodeURIComponent(req));
+  url.searchParams.set('per_page', SEARCH_ITEMS_PER_PAGE);
 
   const response = await fetch(url);
   if (!response.ok) {
